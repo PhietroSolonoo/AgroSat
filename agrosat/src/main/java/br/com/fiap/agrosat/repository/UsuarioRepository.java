@@ -1,0 +1,13 @@
+package br.com.fiap.agrosat.repository;
+
+import br.com.fiap.agrosat.model.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+
+    Optional<Usuario> findByEmailEqualsIgnoreCase(String email);
+
+    boolean existsByEmail(String email);
+}
