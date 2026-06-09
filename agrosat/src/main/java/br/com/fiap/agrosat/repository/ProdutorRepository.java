@@ -14,7 +14,8 @@ public interface ProdutorRepository extends JpaRepository<Produtor, Long> {
 
     List<Produtor> findByUsuarioNomeContainingIgnoreCase(String nome);
 
-    Page<Produtor> findByCidade(String cidade, Pageable pageable);
+    // cidade agora está dentro do @Embedded Endereco, então o caminho é endereco.cidade
+    Page<Produtor> findByEnderecoCidade(String cidade, Pageable pageable);
 
     boolean existsByCpf(String cpf);
 }

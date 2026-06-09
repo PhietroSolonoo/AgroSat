@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "TB_USUARIO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tp_perfil", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
 
     @Id
@@ -25,21 +27,22 @@ public class Usuario {
     @Column(name = "nr_telefone", length = 20)
     private String telefone;
 
-    @Column(name = "tp_perfil", nullable = false, length = 20)
+    // tp_perfil NÃO aparece aqui como campo Java
+    // o JPA usa ela só como discriminator — o banco já tem a coluna criada pelo SQL
+    // insertable=false, updatable=false evita conflito
+    @Column(name = "tp_perfil", insertable = false, updatable = false)
     private String perfil;
 
     @Column(name = "dt_cadastro")
     private LocalDate dataCadastro;
 
-    public Usuario() {
-    }
+    public Usuario() {}
 
-    public Usuario(String nome, String email, String senha, String telefone, String perfil) {
+    public Usuario(String nome, String email, String senha, String telefone) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.perfil = perfil;
         this.dataCadastro = LocalDate.now();
     }
 
@@ -54,7 +57,6 @@ public class Usuario {
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
     public String getPerfil() { return perfil; }
-    public void setPerfil(String perfil) { this.perfil = perfil; }
     public LocalDate getDataCadastro() { return dataCadastro; }
     public void setDataCadastro(LocalDate dataCadastro) { this.dataCadastro = dataCadastro; }
 }
