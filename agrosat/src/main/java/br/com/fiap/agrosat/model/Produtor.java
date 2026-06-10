@@ -24,7 +24,7 @@ public class Produtor {
     @Column(name = "dt_nascimento")
     private LocalDate dataNascimento;
 
-    // ← agora usa @Embedded em vez de campos soltos
+
     @Embedded
     private Endereco endereco;
 

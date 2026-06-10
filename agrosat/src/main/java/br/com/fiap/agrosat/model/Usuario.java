@@ -27,9 +27,6 @@ public class Usuario {
     @Column(name = "nr_telefone", length = 20)
     private String telefone;
 
-    // tp_perfil NÃO aparece aqui como campo Java
-    // o JPA usa ela só como discriminator — o banco já tem a coluna criada pelo SQL
-    // insertable=false, updatable=false evita conflito
     @Column(name = "tp_perfil", insertable = false, updatable = false)
     private String perfil;
 
